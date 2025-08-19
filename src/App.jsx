@@ -1,11 +1,21 @@
-import { useState } from 'react'
-import Navbar from './components/Navbar.jsx'
+import Navbar from "./components/Navbar.jsx";
+import WatchList from "./components/WatchList.jsx";
+import Movies from "./components/Movies.jsx";
+import About from "./components/About.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-      <Navbar />
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Movies />} />
+          <Route path="/watchlist" element={<WatchList />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

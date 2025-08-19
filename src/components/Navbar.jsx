@@ -11,7 +11,7 @@ const Navbar = () => {
         <a href="/watchlist">
           <li className="list-none font-bold">Watchlist</li>
         </a>
-        <a href="#">
+        <a href="/about">
           <li className="list-none font-bold">About</li>
         </a>
       </div>
