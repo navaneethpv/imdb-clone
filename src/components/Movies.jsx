@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MovieCards from "./MovieCards";
-import { CiDeliveryTruck } from "react-icons/ci";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/trending/all/day?api_key=9c5a110ef3fd618e3157fe9991bb75bb&language=en-US&page=1`)
+      .get(`https://api.themoviedb.org/3/trending/all/day?api_key=9c5a110ef3fd618e3157fe9991bb75bb&language=en-US&page=12`)
       .then((response) => {
         console.log(response.data.results);
         setMovies(response.data.results);
@@ -17,7 +16,7 @@ const Movies = () => {
 
   return (
     <>
-      <div className="p-10">
+      <div className="p-14">
         <h1 className="text-3xl font-semibold text-center mt-10">Trending Movies</h1>
       </div>
       <div className="flex flex-wrap m-3 justify-center md:grid md:grid-cols-5 md:m-3 md:ml-14">
