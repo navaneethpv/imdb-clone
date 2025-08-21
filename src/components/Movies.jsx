@@ -20,7 +20,7 @@ const Movies = () => {
       <div className="p-10">
         <h1 className="text-3xl font-semibold text-center mt-10">Trending Movies</h1>
       </div>
-      <div className="flex flex-wrap justify-between m-3">
+      <div className="grid grid-cols-5 gap-4 m-3 ml-14 md:flex md:flex-wrap md:justify-center">
          {movies.map((movieObj) =>{
            return (
             <MovieCards
@@ -30,7 +30,6 @@ const Movies = () => {
             />
            )
          })}
-
       </div>
     </>
   );
