@@ -8,7 +8,7 @@ const Movies = () => {
 
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/trending/all/day?api_key=9c5a110ef3fd618e3157fe9991bb75bb&language=en-US`)
+      .get(`https://api.themoviedb.org/3/trending/all/day?api_key=9c5a110ef3fd618e3157fe9991bb75bb&language=en-US&page=1`)
       .then((response) => {
         console.log(response.data.results);
         setMovies(response.data.results);
