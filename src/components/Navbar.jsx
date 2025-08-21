@@ -8,7 +8,7 @@ const Navbar = () => {
         <FcFilmReel className="text-6xl" />
         <span className="text-4xl font-bold ml-2 text-gray-300">Movies.in</span>
       </div>
-      <div className="flex gap-15 justify-between items-center text-white p-2 ml-20">
+      <div className="flex gap-15 justify-between items-center text-white p-2 ml-20 text-[18px]">
         <Link to="/">
           <li className="list-none font-bold">Home</li>
         </Link>
