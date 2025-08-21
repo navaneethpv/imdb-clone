@@ -1,6 +1,6 @@
 import React from "react";
 
-const MovieCards = ({posterPath}) => {
+const MovieCards = ({ posterPath, name }) => {
   return (
     <>
       <div
@@ -8,7 +8,13 @@ const MovieCards = ({posterPath}) => {
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original/${posterPath.poster_path})`,
         }}
-      ></div>
+      >
+        <div className="flex justify-center items-end h-full">
+          <div className="bg-black/50 flex justify-center items-end rounded-lg text-gray-200 h-contain p-2 w-full font-bold">
+            {name}
+          </div>
+        </div>
+      </div>
     </>
   );
 };
