@@ -26,6 +26,7 @@ const Movies = () => {
             <MovieCards
               key={movieObj.id}
               posterPath={movieObj}
+              name={movieObj.title || movieObj.name || movieObj.original_name}
             />
            )
          })}
