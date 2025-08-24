@@ -3,7 +3,7 @@ import { FcFilmReel } from "react-icons/fc";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
-    <div className="flex justify-between items-center bg-gray-800 text-white p-4">
+    <div className="flex justify-between items-center bg-gray-800 text-white p-4 sticky top-0 z-50">
       <div className="flex items-center">
         <FcFilmReel className="text-6xl" />
         <span className="text-4xl font-bold ml-2 text-gray-300">Movies.in</span>

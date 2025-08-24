@@ -49,19 +49,17 @@ const Banner = () => {
 
   return (
     <div className="w-full overflow-hidden">
-      <div className="relative h-[70vh]">
         <div
-          className={`absolute inset-0 flex flex-col justify-end bg-no-repeat bg-center bg-contain bg-violet-200/70 transition-all duration-700 ease-in-out ${
+          className={`flex flex-col justify-end bg-no-repeat h-[87vh] bg-center bg-cover bg-violet-200/70 transition-all duration-700 ease-in-out ${
             isTransitioning ? "opacity-0 translate-x-full" : "opacity-100 translate-x-0"
           }`}
           style={{ backgroundImage: `url(${bannerData.backgroundImage})` }}
         >
-          <div className="p-1 bg-violet-900/89 flex justify-center items-center text-white">
+          <div className="p-1 bg-violet-900/89 flex w-full justify-center items-end text-white">
             <h1 className="font-bold text-xl">{bannerData.title}</h1>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 export default Banner;
