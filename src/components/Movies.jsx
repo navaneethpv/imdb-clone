@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import MovieCards from "./MovieCards";
 import Pagination from "./Pagination";
+import { fetchTrendingMovies } from "../services/movieService";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -17,23 +17,17 @@ const Movies = () => {
   const handleNextPage = () => {
     setPageNo(pageNo + 1);
   };
-
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/trending/all/day?api_key=9c5a110ef3fd618e3157fe9991bb75bb&language=en-US&page=${pageNo}`
-      )
-      .then((response) => {
-        console.log(response.data.results);
-        setMovies(response.data.results);
+    fetchTrendingMovies(pageNo)
+      .then((res) => {
+        setMovies(res.data.results);
+        setError(false);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.error("Error fetching data:", err);
         setError(true);
-      }
-      )
+      });
   }, [pageNo]);
-
   return (
     <>
       <div className="p-14">
