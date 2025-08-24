@@ -17,8 +17,8 @@ const Movies = () => {
   const handleNextPage = () => {
     setPageNo(pageNo + 1);
   };
-  useEffect(() => {
-    fetchTrendingMovies(pageNo)
+ useEffect(() => {
+    {fetchTrendingMovies(pageNo)
       .then((res) => {
         setMovies(res.data.results);
         setError(false);
@@ -27,6 +27,7 @@ const Movies = () => {
         console.error("Error fetching data:", err);
         setError(true);
       });
+    }
   }, [pageNo]);
   return (
     <>
