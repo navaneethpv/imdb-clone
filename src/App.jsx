@@ -8,8 +8,9 @@ import Banner from "./components/Banner.jsx";
 function App() {
   const [watchlist, setWatchlist] = useState([]);
   const handleAddtoWatchlist = (movieObj) => {
-    setWatchlist([...watchlist, movieObj.title || movieObj.name || movieObj.original_name]);
-    console.log(watchlist);
+    const movieTitle = movieObj.title || movieObj.name || movieObj.original_name;
+    setWatchlist(prevList => [...prevList, movieTitle]);
+    console.log(`Added to watchlist: ${movieTitle}`);
   };
 
   return (
