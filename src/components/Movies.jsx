@@ -3,7 +3,7 @@ import MovieCards from "./MovieCards";
 import Pagination from "./Pagination";
 import { fetchTrendingMovies } from "../services/movieService";
 
-const Movies = () => {
+const Movies = ({handleAddtoWatchlist}) => {
   const [movies, setMovies] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [error, setError] = useState(false);
@@ -42,6 +42,7 @@ const Movies = () => {
               key={movieObj.id}
               posterPath={movieObj}
               name={movieObj.title || movieObj.name || movieObj.original_name}
+              handleAddtoWatchlist={() => handleAddtoWatchlist(movieObj)}
             />
           );
         })}

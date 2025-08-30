@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-const MovieCards = ({ posterPath, name }) => {
-  const [emoji,setEmoji] = useState(false);
-  const handleEmoji = () =>{
-    setEmoji(!emoji)
-  }
+const MovieCards = ({ posterPath, name ,handleAddtoWatchlist}) => {
   return (
     <>
       <div
@@ -13,10 +9,7 @@ const MovieCards = ({ posterPath, name }) => {
         }}
       >
         <div className="flex justify-end  p-2">
-          <div className="text-lg bg-black/60 w-10 h-10 flex items-center justify-center m-2 rounded-xl hover:bg-cyan-600 transition-all duration-150">
-          <button className="hover:cursor-pointer" onClick={handleEmoji}>
-            {emoji ? "❌" : "😍"}
-          </button>
+          <div className="text-lg bg-black/60 w-10 h-10 flex items-center justify-center m-2 rounded-xl hover:bg-cyan-600 transition-all duration-150" onClick={handleAddtoWatchlist}>
           </div>
         </div>
         <div className="flex justify-center items-end h-full mt-[-4.5rem]">
