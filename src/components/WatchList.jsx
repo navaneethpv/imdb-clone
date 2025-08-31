@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 
-const WatchList = () => {
+const WatchList = ({watchlist}) => {
   return (
     <>
       <div className="flex justify-center flex-wrap font-bold mt-10 gap-15 hover:cursor-pointer">
@@ -21,41 +21,29 @@ const WatchList = () => {
           <thead className="border-b-3 border-gray-300">
             <tr className="bg-gray-200">
               <th className="border-0 border-gray-200 w-[50%] p-3">Name</th>
-              <th className="border-0 border-gray-200 p-3">R300ating</th>
+              <th className="border-0 border-gray-200 p-3">Rating</th>
               <th className="border-0 border-gray-200 p-3">Popularity</th>
               <th className="border-0 border-gray-200">Genre</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
+            {watchlist.map((movie)=>{
             <tr className="border-b-2 border-gray-300 hover:bg-gray-100">
               <td className="border-0 border-gray-200 p-4 flex items-center">
                 <img
-                  src={`https://img.freepik.com/premium-psd/movie-poster_1009850-314.jpg?w=2000`}
+                  src={movie.poster_path}
                   alt="Movie"
                   className="w-[8rem] h-[4rem] object-cover rounded-sm ml-14"
                 />
-                <div className="mx-11">Movie bot</div>
+                <div className="mx-11">{movie.title}</div>
               </td>
               <td className="border-0 border-gray-200 p-3">8.5</td>
               <td className="border-0 border-gray-200 p-3">9</td>
               <td className="border-0 border-gray-200 p-3">Action</td>
               <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer"><FaTrash/></td>
             </tr>
-            <tr className="border-b-2 border-gray-300 hover:bg-gray-100">
-              <td className="border-0 border-gray-200 p-4 flex items-center">
-                <img
-                  src={`https://img.freepik.com/premium-psd/movie-poster_1009850-314.jpg?w=2000`}
-                  alt="Movie"
-                  className="w-[8rem] h-[4rem] object-cover rounded-sm ml-14"
-                />
-                <div className="mx-11">Movie bot</div>
-              </td>
-              <td className="border-0 border-gray-200 p-3">8.5</td>
-              <td className="border-0 border-gray-200 p-3">9</td>
-              <td className="border-0 border-gray-200 p-3">Action</td>
-              <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer"><FaTrash/></td>
-            </tr>
+            })}
           </tbody>
         </table>
       </div>

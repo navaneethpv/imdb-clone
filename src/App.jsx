@@ -8,10 +8,12 @@ import Banner from "./components/Banner.jsx";
 function App() {
   const [watchlist, setWatchlist] = useState([]);
   const handleAddtoWatchlist = (movieObj) => {
-    const movieTitle = movieObj.title || movieObj.name || movieObj.original_name;
-    setWatchlist(prevList => [...prevList, movieTitle]);
-    console.log(`Added to watchlist: ${movieTitle}`);
-  };
+    setWatchlist(prevList => {
+      const newList = [...prevList, movieObj];
+      console.log(newList);
+      return newList;
+    });
+  }
 
   return (
     <>
@@ -22,14 +24,14 @@ function App() {
             path="/"
             element={
               <>
-                <Banner />{" "}
+                <Banner />
                 <Movies
                   handleAddtoWatchlist={handleAddtoWatchlist}
                 />
               </>
             }
           />
-          <Route path="/watchlist" element={<WatchList />} />
+          <Route path="/watchlist" element={<WatchList  watchlist={watchlist} />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
