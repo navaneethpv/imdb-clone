@@ -37,7 +37,15 @@ function App() {
               </>
             }
           />
-          <Route path="/watchlist" element={<WatchList />} />
+          <Route
+            path="/watchlist"
+            element={
+              <WatchList
+                watchlist={watchlist}
+                handleRemoveFromWatchlist={handleRemoveFromWatchlist}
+              />
+            }
+          />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
