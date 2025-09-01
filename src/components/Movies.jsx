@@ -49,7 +49,7 @@ const Movies = ({
           </h1>
         ) : (
           <h1 className="text-3xl font-semibold text-center mt-10">
-            Trending Movies
+            {search ? `Search Results for "${search}"` : "Trending Movies"}
           </h1>
         )}
       </div>
