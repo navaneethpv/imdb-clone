@@ -3,7 +3,7 @@ import MovieCards from "./MovieCards";
 import Pagination from "./Pagination";
 import { fetchTrendingMovies } from "../services/movieService";
 
-const Movies = ({ handleAddtoWatchlist }) => {
+const Movies = ({ handleAddtoWatchlist, handleRemoveFromWatchlist, watchlist }) => {
   const [movies, setMovies] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [error, setError] = useState(false);
@@ -52,6 +52,8 @@ const Movies = ({ handleAddtoWatchlist }) => {
               name={movieObj.title || movieObj.name || movieObj.original_name}
               handleAddtoWatchlist={handleAddtoWatchlist}
               movieObj={movieObj}
+              handleRemoveFromWatchlist={handleRemoveFromWatchlist}
+              watchlist={watchlist}
             />
           );
         })}

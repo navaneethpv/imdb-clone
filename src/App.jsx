@@ -10,8 +10,14 @@ function App() {
   const handleAddtoWatchlist = (movieObj) => {
     let newList = [...watchlist, movieObj];
     setWatchlist(newList);
-    console.log(newList)
-    };
+    console.log(newList);
+  };
+
+  const handleRemoveFromWatchlist = (movieObj) => {
+    let filteredList = watchlist.filter((movie) => movie.id !== movieObj.id);
+    setWatchlist(filteredList);
+    console.log(watchlist);
+  };
 
   return (
     <>
@@ -25,11 +31,13 @@ function App() {
                 <Banner />
                 <Movies
                   handleAddtoWatchlist={handleAddtoWatchlist}
+                  handleRemoveFromWatchlist={handleRemoveFromWatchlist}
+                  watchlist={watchlist}
                 />
               </>
             }
           />
-          <Route path="/watchlist" element={<WatchList  watchlist={watchlist} />} />
+          <Route path="/watchlist" element={<WatchList />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>

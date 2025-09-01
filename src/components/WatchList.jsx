@@ -1,13 +1,19 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 
-const WatchList = ({watchlist}) => {
+const WatchList = () => {
   return (
     <>
       <div className="flex justify-center flex-wrap font-bold mt-10 gap-15 hover:cursor-pointer">
-        <div className="bg-blue-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">Action</div>
-        <div className="bg-gray-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">All genres</div>
-        <div className="bg-gray-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">Action</div>
+        <div className="bg-blue-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
+          Action
+        </div>
+        <div className="bg-gray-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
+          All genres
+        </div>
+        <div className="bg-gray-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
+          Action
+        </div>
       </div>
       <div className="flex flex-col items-center mt-10">
         <input
@@ -28,22 +34,22 @@ const WatchList = ({watchlist}) => {
             </tr>
           </thead>
           <tbody>
-            {watchlist.map((movie)=>{
             <tr className="border-b-2 border-gray-300 hover:bg-gray-100">
               <td className="border-0 border-gray-200 p-4 flex items-center">
                 <img
-                  src={movie.poster_path}
+                  src="https://image.tmdb.org/t/p/original//8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg"
                   alt="Movie"
                   className="w-[8rem] h-[4rem] object-cover rounded-sm ml-14"
                 />
-                <div className="mx-11">{movie.title}</div>
+                <div className="mx-11">Hey</div>
               </td>
               <td className="border-0 border-gray-200 p-3">8.5</td>
               <td className="border-0 border-gray-200 p-3">9</td>
               <td className="border-0 border-gray-200 p-3">Action</td>
-              <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer"><FaTrash/></td>
+              <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer">
+                <FaTrash />
+              </td>
             </tr>
-            })}
           </tbody>
         </table>
       </div>

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-const MovieCards = ({ movieObj,posterPath, name, handleAddtoWatchlist }) => {
+const MovieCards = ({ movieObj,posterPath, name, handleAddtoWatchlist , handleRemoveFromWatchlist,watchlist}) => {
+  const isInwatchlist = (movieObj) => {
+      for (let i = 0; i < watchlist.length; i++) {
+        if (watchlist[i].id === movieObj.id) return true;
+  }
+    return false;
+}
   return (
     <>
       <div
@@ -9,10 +15,14 @@ const MovieCards = ({ movieObj,posterPath, name, handleAddtoWatchlist }) => {
         }}
       >
         <div className="flex justify-end  p-2">
-          <div
+          {isInwatchlist(movieObj) ? <div
+            className="text-lg bg-black/60 w-10 h-10 flex items-center justify-center m-2 rounded-xl hover:bg-cyan-600 transition-all duration-150"
+            onClick={()=>handleRemoveFromWatchlist(movieObj)}
+          >❌</div>:<div
             className="text-lg bg-black/60 w-10 h-10 flex items-center justify-center m-2 rounded-xl hover:bg-cyan-600 transition-all duration-150"
             onClick={()=>handleAddtoWatchlist(movieObj)}
-          >😍</div>
+          >😍</div>}
+          
         </div>
         <div className="flex justify-center items-end h-full mt-[-4.5rem]">
           <div className="bg-black/50 flex justify-center items-center rounded-lg text-gray-200 h-contain p-2 w-full font-bold">
