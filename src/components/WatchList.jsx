@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
-const WatchList = ({ watchlist ,handleRemoveFromWatchlist}) => {
-  const [query, setQuery] = useState('');
-  const handleSearch= (e) =>{
+const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
+  const [query, setQuery] = useState("");
+  const handleSearch = (e) => {
     setQuery(e.target.value);
-  }
+  };
+  const filteredMovies = watchlist.filter((movieObj) =>
+    movieObj.title?.toLowerCase().includes(query.toLowerCase())
+  );
   return (
     <>
       <div className="flex justify-center flex-wrap font-bold mt-10 gap-15 hover:cursor-pointer">
@@ -40,30 +43,39 @@ const WatchList = ({ watchlist ,handleRemoveFromWatchlist}) => {
             </tr>
           </thead>
           <tbody>
-            {watchlist.filter((movieObj) =>{
-              return (
-                movieObj.title.toLowerCase().includes(query.toLowerCase())
-              )
-            }).map((movie) => (
-              <tr className="border-b-2 border-gray-300 hover:bg-gray-100" key={movie.id}>
-                <td className="border-0 border-gray-200 p-4 flex items-center">
-                  <img
-                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                    alt="Movie"
-                    className="w-[8rem] h-[4rem] object-contain rounded-sm ml-14"
-                  />
-                  <div className="mx-11" >{movie.title}</div>
-                </td>
-                <td className="border-0 border-gray-200 p-3">{movie.vote_average}</td>
-                <td className="border-0 border-gray-200 p-3">
-                  {movie.popularity}
-                </td>
-                <td className="border-0 border-gray-200 p-3">Action</td>
-                <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer">
-                  <FaTrash onClick={()=>handleRemoveFromWatchlist(movie)}/>
+            {filteredMovies.length === 0 && query ? (
+              <tr>
+                <td colSpan="5" className="text-center p-4 font-bold">
+                  No movies found matching your search.
                 </td>
               </tr>
-            ))}
+            ) : (
+              filteredMovies.map((movie) => (
+                <tr
+                  className="border-b-2 border-gray-300 hover:bg-gray-100"
+                  key={movie.id}
+                >
+                  <td className="border-0 border-gray-200 p-4 flex items-center">
+                    <img
+                      src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                      alt="Movie"
+                      className="w-[8rem] h-[4rem] object-contain rounded-sm ml-14"
+                    />
+                    <div className="mx-11">{movie.title}</div>
+                  </td>
+                  <td className="border-0 border-gray-200 p-3">
+                    {movie.vote_average}
+                  </td>
+                  <td className="border-0 border-gray-200 p-3">
+                    {movie.popularity}
+                  </td>
+                  <td className="border-0 border-gray-200 p-3">Action</td>
+                  <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer">
+                    <FaTrash onClick={() => handleRemoveFromWatchlist(movie)} />
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
