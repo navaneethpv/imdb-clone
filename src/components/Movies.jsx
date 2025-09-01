@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import MovieCards from "./MovieCards";
 import Pagination from "./Pagination";
-import { fetchTrendingMovies } from "../services/movieService";
+import { fetchTrendingMovies, searchMovies } from "../services/movieService";
 
-const Movies = ({ handleAddtoWatchlist, handleRemoveFromWatchlist, watchlist }) => {
+const Movies = ({
+  handleAddtoWatchlist,
+  handleRemoveFromWatchlist,
+  watchlist,
+  search,
+}) => {
   const [movies, setMovies] = useState([]);
   const [pageNo, setPageNo] = useState(1);
   const [error, setError] = useState(false);
@@ -18,18 +23,23 @@ const Movies = ({ handleAddtoWatchlist, handleRemoveFromWatchlist, watchlist }) 
     setPageNo(pageNo + 1);
   };
   useEffect(() => {
-    {
-      fetchTrendingMovies(pageNo)
-        .then((res) => {
-          setMovies(res.data.results);
-          setError(false);
-        })
-        .catch((err) => {
-          console.error("Error fetching data:", err);
-          setError(true);
-        });
-    }
-  }, [pageNo]);
+    const fetchMovies = search ? searchMovies(search, pageNo) : fetchTrendingMovies(pageNo);
+    fetchMovies
+      .then((res) => {
+        setMovies(res.data.results);
+        setError(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+        setError(true);
+      });
+  }, [pageNo, search]);
+
+  useEffect(() => {
+    setPageNo(1);
+  }, [search]);
+
+
   return (
     <>
       <div className="p-14">
@@ -43,20 +53,24 @@ const Movies = ({ handleAddtoWatchlist, handleRemoveFromWatchlist, watchlist }) 
           </h1>
         )}
       </div>
-      <div className="flex flex-wrap m-3 justify-center md:grid md:grid-cols-5 md:m-3 md:ml-14">
-        {movies.map((movieObj) => {
-          return (
-            <MovieCards
-              key={movieObj.id}
-              posterPath={movieObj}
-              name={movieObj.title || movieObj.name || movieObj.original_name}
-              handleAddtoWatchlist={handleAddtoWatchlist}
-              movieObj={movieObj}
-              handleRemoveFromWatchlist={handleRemoveFromWatchlist}
-              watchlist={watchlist}
-            />
-          );
-        })}
+      <div className="flex flex-wrap m-3 gap-4 justify-center md:grid md:grid-cols-5 md:m-3 md:ml-14">
+        {movies.length === 0 && search ? (
+          <div className="col-span-5 text-center text-2xl">No movies found</div>
+        ) : (
+          movies.map((movieObj) => {
+            return (
+              <MovieCards
+                key={movieObj.id}
+                posterPath={movieObj}
+                name={movieObj.title || movieObj.name || movieObj.original_name}
+                handleAddtoWatchlist={handleAddtoWatchlist}
+                movieObj={movieObj}
+                handleRemoveFromWatchlist={handleRemoveFromWatchlist}
+                watchlist={watchlist}
+              />
+            );
+          })
+        )}
       </div>
       <Pagination
         handlePrevPage={handlePrevPage}

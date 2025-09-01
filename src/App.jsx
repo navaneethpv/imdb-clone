@@ -28,11 +28,15 @@ function App() {
     }
     setWatchlist(JSON.parse(moviesFromLocalStorage));
   },[])
+  const [search, setSearch] = useState('')
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  }
 
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <Navbar search={search}  handleSearch={handleSearch} />
         <Routes>
           <Route
             path="/"
@@ -43,6 +47,7 @@ function App() {
                   handleAddtoWatchlist={handleAddtoWatchlist}
                   handleRemoveFromWatchlist={handleRemoveFromWatchlist}
                   watchlist={watchlist}
+                  search={search} 
                 />
               </>
             }

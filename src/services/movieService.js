@@ -20,3 +20,15 @@ export const fetchTrendingMovies = (pageNo = 1) => {
 // export const fetchMovieDetails = (movieId) => {
 //   return axios.get(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
 // };
+
+/**
+ * Searches for movies based on a query
+ * @param {string} query - The search query
+ * @param {number} pageNo - The page number to fetch
+ * @returns {Promise} Promise that resolves with search results or rejects with error
+ */
+export const searchMovies = (query, pageNo = 1) => {
+  return axios.get(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=${pageNo}`
+  );
+};
