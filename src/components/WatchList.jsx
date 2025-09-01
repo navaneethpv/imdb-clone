@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
 const WatchList = ({ watchlist ,handleRemoveFromWatchlist}) => {
+  const [query, setQuery] = useState('');
+  const handleSearch= (e) =>{
+    setQuery(e.target.value);
+  }
   return (
     <>
       <div className="flex justify-center flex-wrap font-bold mt-10 gap-15 hover:cursor-pointer">
@@ -20,6 +24,8 @@ const WatchList = ({ watchlist ,handleRemoveFromWatchlist}) => {
           type="text"
           className="border-2 border-gray-300 p-4 rounded-lg w-[30%] font-bold outline-none"
           placeholder="Search your watchlist..."
+          onChange={handleSearch}
+          value={query}
         />
       </div>
       <div className="overflow-hidden border border-gray-300 rounded-lg m-10">
@@ -34,7 +40,11 @@ const WatchList = ({ watchlist ,handleRemoveFromWatchlist}) => {
             </tr>
           </thead>
           <tbody>
-            {watchlist.map((movie) => (
+            {watchlist.filter((movieObj) =>{
+              return (
+                movieObj.title.toLowerCase().includes(query.toLowerCase())
+              )
+            }).map((movie) => (
               <tr className="border-b-2 border-gray-300 hover:bg-gray-100" key={movie.id}>
                 <td className="border-0 border-gray-200 p-4 flex items-center">
                   <img
