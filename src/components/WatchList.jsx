@@ -56,7 +56,13 @@ const WatchList = ({
             </tr>
           </thead>
           <tbody>
-            {filteredMovies.length === 0 && query ? (
+            {watchlist.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center p-4 font-bold">
+                  Your watchlist is empty. Add some movies.
+                </td>
+              </tr>
+            ) : filteredMovies.length === 0 && query ? (
               <tr>
                 <td colSpan="5" className="text-center p-4 font-bold">
                   No movies found matching your search.
