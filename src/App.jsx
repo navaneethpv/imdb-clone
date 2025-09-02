@@ -16,22 +16,20 @@ function App() {
     let newList = [...watchlist, movieObj];
     setWatchlist(newList);
     localStorage.setItem("Movies", JSON.stringify(newList));
-    console.log(
-      `Sucessfully added the movie '${
-        movieObj.title || movieObj.name || movieObj.original_name
-      }'`
-    );
-    console.log(movieObj);
   };
 
   const handleRemoveFromWatchlist = (movieObj) => {
     let filteredList = watchlist.filter((movie) => movie.id !== movieObj.id);
     setWatchlist(filteredList);
     localStorage.setItem("Movies", JSON.stringify(filteredList));
-    console.log(`Sucessfully removed the movie '${
-      movieObj.title || movieObj.name || movieObj.original_name
-    }'`);
   };
+  
+  const handleClearAll = () =>{
+    let removedList = [];
+    setWatchlist (removedList);
+    localStorage.setItem('Movies',JSON.stringify(removedList))
+  }
+
   useEffect(() => {
     let moviesFromLocalStorage = localStorage.getItem("Movies");
     if (!moviesFromLocalStorage) {
@@ -70,6 +68,7 @@ function App() {
               <WatchList
                 watchlist={watchlist}
                 handleRemoveFromWatchlist={handleRemoveFromWatchlist}
+                handleClearAll = {handleClearAll}
               />
             }
           />

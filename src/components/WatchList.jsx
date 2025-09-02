@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
-const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
+const WatchList = ({
+  watchlist,
+  handleRemoveFromWatchlist,
+  handleClearAll,
+}) => {
   const [query, setQuery] = useState("");
   const handleSearch = (e) => {
     setQuery(e.target.value);
@@ -42,7 +46,10 @@ const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
               <th className="border-0 border-gray-200 p-3">Popularity</th>
               <th className="border-0 border-gray-200 p-3">Genre</th>
               <th>
-                <button className="px-4 py-2 border-1 border-blue-300 rounded-full bg-blue-400/50 text-white hover:bg-blue-400 hover:cursor-pointer">
+                <button
+                  className="px-4 py-2 border-1 border-blue-300 rounded-full bg-blue-400/80 text-white hover:bg-blue-400 hover:cursor-pointer active:border-blue-300"
+                  onClick={handleClearAll}
+                >
                   Clear all
                 </button>
               </th>
