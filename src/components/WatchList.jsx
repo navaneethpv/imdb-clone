@@ -7,7 +7,7 @@ const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
     setQuery(e.target.value);
   };
   const filteredMovies = watchlist.filter((movieObj) =>
-    movieObj.title?.toLowerCase().includes(query.toLocaleLowerCase())
+    (movieObj.title || movieObj.name || movieObj.original_name)?.toLowerCase().includes(query.toLowerCase())
   );
   return (
     <>
