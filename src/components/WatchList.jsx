@@ -7,7 +7,9 @@ const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
     setQuery(e.target.value);
   };
   const filteredMovies = watchlist.filter((movieObj) =>
-    (movieObj.title || movieObj.name || movieObj.original_name)?.toLowerCase().includes(query.toLowerCase())
+    (movieObj.title || movieObj.name || movieObj.original_name)
+      ?.toLowerCase()
+      .includes(query.toLowerCase())
   );
   return (
     <>
@@ -38,8 +40,12 @@ const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
               <th className="border-0 border-gray-200 w-[50%] p-3">Name</th>
               <th className="border-0 border-gray-200 p-3">Rating</th>
               <th className="border-0 border-gray-200 p-3">Popularity</th>
-              <th className="border-0 border-gray-200">Genre</th>
-              <th></th>
+              <th className="border-0 border-gray-200 p-3">Genre</th>
+              <th>
+                <button className="px-4 py-2 border-1 border-blue-300 rounded-full bg-blue-400/50 text-white hover:bg-blue-400 hover:cursor-pointer">
+                  Clear all
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -57,11 +63,17 @@ const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
                 >
                   <td className="border-0 border-gray-200 p-4 flex items-center">
                     <img
-                      src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : 'https://via.placeholder.com/128x64?text=No+Image'}
+                      src={
+                        movie.poster_path
+                          ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+                          : "https://via.placeholder.com/128x64?text=No+Image"
+                      }
                       alt="Movie"
                       className="w-[8rem] h-[4rem] object-contain rounded-sm ml-14"
                     />
-                    <div className="mx-11">{movie.title || movie.name || movie.original_name}</div>
+                    <div className="mx-11">
+                      {movie.title || movie.name || movie.original_name}
+                    </div>
                   </td>
                   <td className="border-0 border-gray-200 p-3">
                     {movie.vote_average}
@@ -70,7 +82,7 @@ const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
                     {movie.popularity}
                   </td>
                   <td className="border-0 border-gray-200 p-3">Action</td>
-                  <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer">
+                  <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer flex justify-center items-center mb-10">
                     <FaTrash onClick={() => handleRemoveFromWatchlist(movie)} />
                   </td>
                 </tr>
