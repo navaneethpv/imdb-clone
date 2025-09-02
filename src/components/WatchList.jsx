@@ -7,6 +7,8 @@ const WatchList = ({
   handleClearAll,
 }) => {
   const [query, setQuery] = useState("");
+  const [sortType, setSortType] = useState("asc");
+  const [sortOrder, setSortOrder] = useState("asc");
   const handleSearch = (e) => {
     setQuery(e.target.value);
   };
@@ -15,6 +17,67 @@ const WatchList = ({
       ?.toLowerCase()
       .includes(query.toLowerCase())
   );
+  const handleSortByRating = () => {
+    if (sortType === "rating") {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortType("rating");
+      setSortOrder("asc");
+    }
+  };
+
+  const handleSortByName = () => {
+    if (sortType === "name") {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortType("name");
+      setSortOrder("asc");
+    }
+  };
+  const handleSortByPopularity = () => {
+    if (sortType === "Popularity") {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortType("Popularity");
+      setSortOrder("asc");
+    }
+  };
+
+  const sortedMovies = [...filteredMovies].sort((movieA, movieB) => {
+    if (sortType === "rating") {
+      if (sortOrder === "asc") {
+        return movieA.vote_average - movieB.vote_average;
+      } else if (sortOrder === "desc") {
+        return movieB.vote_average - movieA.vote_average;
+      }
+    } else if (sortType === "name") {
+      const nameA = (
+        movieA.title ||
+        movieA.name ||
+        movieA.original_name ||
+        ""
+      ).toLowerCase();
+      const nameB = (
+        movieB.title ||
+        movieB.name ||
+        movieB.original_name ||
+        ""
+      ).toLowerCase();
+      if (sortOrder === "asc") {
+        return nameA.localeCompare(nameB);
+      } else if (sortOrder === "desc") {
+        return nameB.localeCompare(nameA);
+      }
+    } else if (sortType === "Popularity") {
+      if (sortOrder === "asc") {
+        return movieA.popularity- movieB.popularity;
+      } else if (sortOrder === "desc") {
+        return movieB.popularity - movieA.popularity;
+      }
+    }
+    return 0;
+  });
+
   return (
     <>
       <div className="flex justify-center flex-wrap font-bold mt-10 gap-15 hover:cursor-pointer">
@@ -41,9 +104,27 @@ const WatchList = ({
         <table className="w-full m-auto border-0 border-gray- text-gray-800 text-center">
           <thead className="border-b-3 border-gray-300">
             <tr className="bg-gray-200">
-              <th className="border-0 border-gray-200 w-[50%] p-3">Name</th>
-              <th className="border-0 border-gray-200 p-3">Rating</th>
-              <th className="border-0 border-gray-200 p-3">Popularity</th>
+              <th
+                className="border-0 border-gray-200 w-[50%] p-3 hover:cursor-pointer"
+                onClick={handleSortByName}
+              >
+                Name{" "}
+                {sortType === "name" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+              </th>
+              <th
+                className="border-0 border-gray-200 p-3 hover:cursor-pointer"
+                onClick={handleSortByRating}
+              >
+                Rating{" "}
+                {sortType === "rating" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+              </th>
+              <th
+                className="border-0 border-gray-200 p-3 hover:cursor-pointer"
+                onClick={handleSortByPopularity}
+              >
+                Popularity {""}
+                {sortType === "Popularity" ? (sortOrder === "asc" ? "↑" : "↓"):""}
+              </th>
               <th className="border-0 border-gray-200 p-3">Genre</th>
               <th>
                 <button
@@ -62,14 +143,14 @@ const WatchList = ({
                   Your watchlist is empty. Add some movies.
                 </td>
               </tr>
-            ) : filteredMovies.length === 0 && query ? (
+            ) : sortedMovies.length === 0 && query ? (
               <tr>
                 <td colSpan="5" className="text-center p-4 font-bold">
                   No movies found matching your search.
                 </td>
               </tr>
             ) : (
-              filteredMovies.map((movie) => (
+              sortedMovies.map((movie) => (
                 <tr
                   className="border-b-2 border-gray-300 hover:bg-gray-100"
                   key={movie.id}
