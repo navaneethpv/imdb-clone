@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 const MovieCards = ({ movieObj,posterPath, name, handleAddtoWatchlist , handleRemoveFromWatchlist,watchlist}) => {
   const isInwatchlist = (movieObj) => {
       for (let i = 0; i < watchlist.length; i++) {
@@ -11,7 +11,7 @@ const MovieCards = ({ movieObj,posterPath, name, handleAddtoWatchlist , handleRe
       <div
         className="h-110 w-[290px] bg-contain bg-center rounded-xl mb-10 hover:cursor-pointer hover:scale-108 transition-all duration-160"
         style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original/${posterPath.poster_path})`,
+          backgroundImage: posterPath.poster_path ? `url(https://image.tmdb.org/t/p/original/${posterPath.poster_path})` : `url(https://via.placeholder.com/290x400?text=No+Image)`,
         }}
       >
         <div className="flex justify-end  p-2">
@@ -26,7 +26,7 @@ const MovieCards = ({ movieObj,posterPath, name, handleAddtoWatchlist , handleRe
         </div>
         <div className="flex justify-center items-end h-full mt-[-4.5rem]">
           <div className="bg-black/50 flex justify-center items-center rounded-lg text-gray-200 h-contain p-2 w-full font-bold">
-            {name}
+            {movieObj.title || movieObj.name || movieObj.original_name}
           </div>
         </div>
       </div>

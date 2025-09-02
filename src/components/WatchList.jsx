@@ -7,7 +7,7 @@ const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
     setQuery(e.target.value);
   };
   const filteredMovies = watchlist.filter((movieObj) =>
-    movieObj.title?.toLowerCase().includes(query.toLowerCase())
+    movieObj.title?.toLowerCase().includes(query.toLocaleLowerCase())
   );
   return (
     <>
@@ -57,11 +57,11 @@ const WatchList = ({ watchlist, handleRemoveFromWatchlist }) => {
                 >
                   <td className="border-0 border-gray-200 p-4 flex items-center">
                     <img
-                      src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                      src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : 'https://via.placeholder.com/128x64?text=No+Image'}
                       alt="Movie"
                       className="w-[8rem] h-[4rem] object-contain rounded-sm ml-14"
                     />
-                    <div className="mx-11">{movie.title}</div>
+                    <div className="mx-11">{movie.title || movie.name || movie.original_name}</div>
                   </td>
                   <td className="border-0 border-gray-200 p-3">
                     {movie.vote_average}
