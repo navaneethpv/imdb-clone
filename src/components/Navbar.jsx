@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { FcFilmReel } from "react-icons/fc";
 import { Link } from "react-router-dom";
 const Navbar = ({handleSearch,search}) => {

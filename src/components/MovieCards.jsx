@@ -1,5 +1,5 @@
 import React from "react";
-const MovieCards = ({ movieObj,posterPath, name, handleAddtoWatchlist , handleRemoveFromWatchlist,watchlist}) => {
+const MovieCards = ({ movieObj,posterPath, handleAddtoWatchlist , handleRemoveFromWatchlist,watchlist}) => {
   const isInwatchlist = (movieObj) => {
       for (let i = 0; i < watchlist.length; i++) {
         if (watchlist[i].id === movieObj.id) return true;
