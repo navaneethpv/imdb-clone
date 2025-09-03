@@ -8,7 +8,7 @@ const WatchList = ({
   handleClearAll,
 }) => {
   const [query, setQuery] = useState("");
-  const [sortType, setSortType] = useState("asc");
+  const [sortType, setSortType] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
   const handleSearch = (e) => {
     setQuery(e.target.value);
@@ -36,10 +36,10 @@ const WatchList = ({
     }
   };
   const handleSortByPopularity = () => {
-    if (sortType === "Popularity") {
+    if (sortType === "popularity") {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
-      setSortType("Popularity");
+      setSortType("popularity");
       setSortOrder("asc");
     }
   };
@@ -69,7 +69,7 @@ const WatchList = ({
       } else if (sortOrder === "desc") {
         return nameB.localeCompare(nameA);
       }
-    } else if (sortType === "Popularity") {
+    } else if (sortType === "popularity") {
       if (sortOrder === "asc") {
         return movieA.popularity - movieB.popularity;
       } else if (sortOrder === "desc") {
@@ -81,7 +81,7 @@ const WatchList = ({
 
   return (
     <>
-      <div className="flex justify-center flex-wrap font-bold mt-10 gap-15 hover:cursor-pointer">
+      <div className="flex justify-center flex-wrap font-bold mt-10 gap-4 hover:cursor-pointer">
         <div className="bg-blue-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
           Action
         </div>
@@ -89,7 +89,7 @@ const WatchList = ({
           All genres
         </div>
         <div className="bg-gray-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
-          Action
+          Comedy
         </div>
       </div>
       <div className="flex flex-col items-center mt-10">
@@ -102,8 +102,8 @@ const WatchList = ({
         />
       </div>
       <div className="overflow-hidden border border-gray-300 rounded-lg m-10">
-        <table className="w-full m-auto border-0 border-gray- text-gray-800 text-center">
-          <thead className="border-b-3 border-gray-300">
+        <table className="w-full m-auto border-0 border-gray-300 text-gray-800 text-center">
+          <thead className="border-b border-gray-300">
             <tr className="bg-gray-200">
               <th
                 className="border-0 border-gray-200 w-[50%] p-3 hover:cursor-pointer"
@@ -124,7 +124,7 @@ const WatchList = ({
                 onClick={handleSortByPopularity}
               >
                 Popularity {""}
-                {sortType === "Popularity"
+                {sortType === "popularity"
                   ? sortOrder === "asc"
                     ? "↑"
                     : "↓"
@@ -181,9 +181,9 @@ const WatchList = ({
                     {movie.popularity}
                   </td>
                   <td className="border-0 border-gray-200 p-3">
-                    {genres[movie.genre_ids[0]]}
+                    {movie.genre_ids && movie.genre_ids.length > 0 ? genres[movie.genre_ids[0]] : "N/A"}
                   </td>
-                  <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer flex justify-center items-center mb-10">
+                  <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer flex justify-center items-center">
                     <FaTrash onClick={() => handleRemoveFromWatchlist(movie)} />
                   </td>
                 </tr>
