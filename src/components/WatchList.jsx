@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import genres from "../Utilities/genre";
 
@@ -10,6 +10,7 @@ const WatchList = ({
   const [query, setQuery] = useState("");
   const [sortType, setSortType] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [genreList, setGenreList] = useState(["All genres"]);
   const handleSearch = (e) => {
     setQuery(e.target.value);
   };
@@ -79,18 +80,24 @@ const WatchList = ({
     return 0;
   });
 
+  useEffect(() => {
+    let temp = watchlist.map((movieObj) => {
+      return genres[movieObj.genre_ids[0]];
+    });
+    setGenreList(["All genres", ...temp]);
+    console.log(temp);
+  }, [watchlist]);
+
   return (
     <>
       <div className="flex justify-center flex-wrap font-bold mt-10 gap-4 hover:cursor-pointer">
-        <div className="bg-blue-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
-          Action
-        </div>
-        <div className="bg-gray-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
-          All genres
-        </div>
-        <div className="bg-gray-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
-          Comedy
-        </div>
+        {genreList.map((genre) => {
+          return (
+            <div className="bg-blue-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
+              {genre}
+            </div>
+          );
+        })}
       </div>
       <div className="flex flex-col items-center mt-10">
         <input
@@ -181,7 +188,9 @@ const WatchList = ({
                     {movie.popularity}
                   </td>
                   <td className="border-0 border-gray-200 p-3">
-                    {movie.genre_ids && movie.genre_ids.length > 0 ? genres[movie.genre_ids[0]] : "N/A"}
+                    {movie.genre_ids && movie.genre_ids.length > 0
+                      ? genres[movie.genre_ids[0]]
+                      : "N/A"}
                   </td>
                   <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer flex justify-center items-center">
                     <FaTrash onClick={() => handleRemoveFromWatchlist(movie)} />
