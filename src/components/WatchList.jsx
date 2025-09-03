@@ -11,6 +11,7 @@ const WatchList = ({
   const [sortType, setSortType] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
   const [genreList, setGenreList] = useState(["All genres"]);
+  const [selectedGenre, setSelectedGenre] = useState("All genres");
   const handleSearch = (e) => {
     setQuery(e.target.value);
   };
@@ -83,21 +84,29 @@ const WatchList = ({
   useEffect(() => {
     let temp = watchlist.map((movieObj) => {
       return genres[movieObj.genre_ids[0]];
-    });
-    setGenreList(["All genres", ...temp]);
-    console.log(temp);
+    }).filter(Boolean);
+    const uniqueGenres = temp.filter((genre, index) => temp.indexOf(genre) === index);
+    setGenreList(["All genres", ...uniqueGenres]);
+    console.log(uniqueGenres);
   }, [watchlist]);
+
+  const handleGenreClick = (genre) => {
+    setSelectedGenre(genre);
+    console.log(selectedGenre)
+  };
 
   return (
     <>
-      <div className="flex justify-center flex-wrap font-bold mt-10 gap-4 hover:cursor-pointer">
-        {genreList.map((genre) => {
-          return (
-            <div className="bg-blue-400/70 py-3 px-11 rounded-lg text-white hover:bg-blue-500">
-              {genre}
-            </div>
-          );
-        })}
+      <div className="flex justify-center">
+        <div className="flex justify-center max-w-250 flex-wrap font-bold mt-10 gap-4 hover:cursor-pointer">
+          {genreList.map((genre) => {
+            return (
+              <div className={selectedGenre === genre ? "bg-blue-500/70 py-3 px-11 rounded-lg text-white":"bg-gray-500/70 py-3 px-11 rounded-lg text-white"} onClick={() =>handleGenreClick(genre)} key = {genre}>
+                {genre}
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="flex flex-col items-center mt-10">
         <input
