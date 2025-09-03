@@ -92,7 +92,7 @@ const WatchList = ({
 
   const handleGenreClick = (genre) => {
     setSelectedGenre(genre);
-    console.log(selectedGenre)
+    console.log(genre)
   };
 
   return (
