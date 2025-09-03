@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaTrash } from "react-icons/fa";
+import genres from "../Utilities/genre";
 
 const WatchList = ({
   watchlist,
@@ -70,7 +71,7 @@ const WatchList = ({
       }
     } else if (sortType === "Popularity") {
       if (sortOrder === "asc") {
-        return movieA.popularity- movieB.popularity;
+        return movieA.popularity - movieB.popularity;
       } else if (sortOrder === "desc") {
         return movieB.popularity - movieA.popularity;
       }
@@ -123,7 +124,11 @@ const WatchList = ({
                 onClick={handleSortByPopularity}
               >
                 Popularity {""}
-                {sortType === "Popularity" ? (sortOrder === "asc" ? "↑" : "↓"):""}
+                {sortType === "Popularity"
+                  ? sortOrder === "asc"
+                    ? "↑"
+                    : "↓"
+                  : ""}
               </th>
               <th className="border-0 border-gray-200 p-3">Genre</th>
               <th>
@@ -175,7 +180,9 @@ const WatchList = ({
                   <td className="border-0 border-gray-200 p-3">
                     {movie.popularity}
                   </td>
-                  <td className="border-0 border-gray-200 p-3">Action</td>
+                  <td className="border-0 border-gray-200 p-3">
+                    {genres[movie.genre_ids[0]]}
+                  </td>
                   <td className="p-2 text-lg text-red-400 hover:text-red-500 hover:cursor-pointer flex justify-center items-center mb-10">
                     <FaTrash onClick={() => handleRemoveFromWatchlist(movie)} />
                   </td>
