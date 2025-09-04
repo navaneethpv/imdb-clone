@@ -15,11 +15,13 @@ const WatchList = ({
   const handleSearch = (e) => {
     setQuery(e.target.value);
   };
-  const filteredMovies = watchlist.filter((movieObj) =>
-    (movieObj.title || movieObj.name || movieObj.original_name)
+  const filteredMovies = watchlist.filter((movieObj) =>{
+    const matchesQuery = (movieObj.title || movieObj.name || movieObj.original_name)
       ?.toLowerCase()
       .includes(query.toLowerCase())
-  );
+      const matchesGenre = genres[movieObj.genre_ids[0]] 
+      return matchesQuery && matchesGenre;
+});
   const handleSortByRating = () => {
     if (sortType === "rating") {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -84,15 +86,15 @@ const WatchList = ({
   useEffect(() => {
     let temp = watchlist.map((movieObj) => {
       return genres[movieObj.genre_ids[0]];
-    }).filter(Boolean);
-    const uniqueGenres = temp.filter((genre, index) => temp.indexOf(genre) === index);
-    setGenreList(["All genres", ...uniqueGenres]);
-    console.log(uniqueGenres);
+    });
+    temp = new Set(temp);
+    setGenreList(["All genres",...temp])
+    console.log(temp);
   }, [watchlist]);
 
   const handleGenreClick = (genre) => {
     setSelectedGenre(genre);
-    console.log(genre)
+    console.log(genre);
   };
 
   return (
@@ -101,7 +103,15 @@ const WatchList = ({
         <div className="flex justify-center max-w-250 flex-wrap font-bold mt-10 gap-4 hover:cursor-pointer">
           {genreList.map((genre) => {
             return (
-              <div className={selectedGenre === genre ? "bg-blue-500/70 py-3 px-11 rounded-lg text-white":"bg-gray-500/70 py-3 px-11 rounded-lg text-white"} onClick={() =>handleGenreClick(genre)} key = {genre}>
+              <div
+                className={
+                  selectedGenre === genre
+                    ? "bg-blue-500/70 py-3 px-11 rounded-lg text-white"
+                    : "bg-gray-500/70 py-3 px-11 rounded-lg text-white"
+                }
+                onClick={() => handleGenreClick(genre)}
+                key={genre}
+              >
                 {genre}
               </div>
             );
