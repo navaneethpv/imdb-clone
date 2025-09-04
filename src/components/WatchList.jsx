@@ -19,8 +19,15 @@ const WatchList = ({
     const matchesQuery = (movieObj.title || movieObj.name || movieObj.original_name)
       ?.toLowerCase()
       .includes(query.toLowerCase())
-      const matchesGenre = genres[movieObj.genre_ids[0]] 
-      return matchesQuery && matchesGenre;
+      const matchesGenre = () =>{
+        if (selectedGenre === "All genres"){
+          return true;
+        }
+        else {
+          return movieObj.genre_ids && movieObj.genre_ids.length > 0 && genres[movieObj.genre_ids[0]] === selectedGenre;
+        }
+      }
+      return matchesQuery && matchesGenre();
 });
   const handleSortByRating = () => {
     if (sortType === "rating") {
