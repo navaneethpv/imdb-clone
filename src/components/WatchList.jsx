@@ -10,7 +10,7 @@ const WatchList = ({
   const [query, setQuery] = useState("");
   const [sortType, setSortType] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
-  const [genreList, setGenreList] = useState(["All genres"]);
+  const [genreList, setGenreList] = useState([""]);
   const [selectedGenre, setSelectedGenre] = useState("All genres");
   const handleSearch = (e) => {
     setQuery(e.target.value);
