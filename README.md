@@ -2,6 +2,13 @@
 
 A modern React-based movie discovery and watchlist management application that allows users to browse trending movies, search for specific films, and maintain a personal watchlist with advanced filtering and sorting capabilities.
 
+#
+
+## Screenshots
+![Screen-shot](src/assets/ScreenShots/image1.png)
+![Screen-shot](src/assets/ScreenShots/image2.png)
+![Screen-shot](src/assets/ScreenShots/image3.png)
+
 ## Features
 
 ### 🎬 Movie Discovery
