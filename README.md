@@ -149,3 +149,6 @@ This project is for educational purposes and is not affiliated with IBM or TMDB.
 - [React](https://reactjs.org/) for the frontend framework
 - [Tailwind CSS](https://tailwindcss.com/) for styling
 - [Vite](https://vitejs.dev/) for the build tool
+#
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ed25b797-4cb6-414a-af1f-8099a55dd858/deploy-status)](https://app.netlify.com/projects/ibmclone10992/deploys)
